@@ -6,6 +6,16 @@ export const Link = objectType({
     t.nonNull.string("id");
     t.nonNull.string("description");
     t.nonNull.string("url");
+    t.field("postedBy", {
+      type: "User",
+      resolve(parent, args, ctx) {
+        return ctx.prisma.link.findUnique({
+          where: {
+            id: parent.id,
+          }
+        }).postedBy()
+      },
+    });
   },
 });
 
