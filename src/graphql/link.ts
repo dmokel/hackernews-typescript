@@ -16,6 +16,16 @@ export const Link = objectType({
         }).postedBy()
       },
     });
+    t.list.nonNull.field("voters", {
+      type: "User",
+      resolve(parent, arg, ctx, info) {
+        return ctx.prisma.link.findUnique({
+          where: {
+            id: parent.id,
+          }
+        }).voters();
+      },
+    });
   },
 });
 

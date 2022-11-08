@@ -15,8 +15,10 @@ model Link{
   createAt DateTime @default(now())
   description String
   url String
-  postedBy User? @relation(fields:[postedById],references: [id])
-  postedById String
+  postedBy User? @relation(name:"PostedBy",fields:[postedById],references: [id])
+  postedById String?
+  voters User[] @relation(name:"Votes",fields: [voterIds],references: [id])
+  voterIds String[] @db.ObjectId
 }
 
 model User{
@@ -24,5 +26,7 @@ model User{
   name String
   email String @unique
   password String
-  links Link[]
+  links Link[] @relation(name:"PostedBy")
+  votes Link[] @relation(name:"Votes",fields: [voteIds],references: [id])
+  voteIds String[] @db.ObjectId
 }

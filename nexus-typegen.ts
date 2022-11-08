@@ -44,6 +44,10 @@ export interface NexusGenObjects {
     id: string; // String!
     name: string; // String!
   }
+  Vote: { // root type
+    link: NexusGenRootTypes['Link']; // Link!
+    user: NexusGenRootTypes['User']; // User!
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -66,6 +70,7 @@ export interface NexusGenFieldTypes {
     id: string; // String!
     postedBy: NexusGenRootTypes['User'] | null; // User
     url: string; // String!
+    voters: NexusGenRootTypes['User'][] | null; // [User!]
   }
   Mutation: { // field return type
     deleteLink: NexusGenRootTypes['Link']; // Link!
@@ -73,6 +78,7 @@ export interface NexusGenFieldTypes {
     post: NexusGenRootTypes['Link']; // Link!
     signup: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     updateLink: NexusGenRootTypes['Link']; // Link!
+    vote: NexusGenRootTypes['Vote']; // Vote!
   }
   Query: { // field return type
     feed: NexusGenRootTypes['Link'][]; // [Link!]!
@@ -83,6 +89,11 @@ export interface NexusGenFieldTypes {
     id: string; // String!
     links: NexusGenRootTypes['Link'][] | null; // [Link!]
     name: string; // String!
+    votes: NexusGenRootTypes['Link'][] | null; // [Link!]
+  }
+  Vote: { // field return type
+    link: NexusGenRootTypes['Link']; // Link!
+    user: NexusGenRootTypes['User']; // User!
   }
 }
 
@@ -96,6 +107,7 @@ export interface NexusGenFieldTypeNames {
     id: 'String'
     postedBy: 'User'
     url: 'String'
+    voters: 'User'
   }
   Mutation: { // field return type name
     deleteLink: 'Link'
@@ -103,6 +115,7 @@ export interface NexusGenFieldTypeNames {
     post: 'Link'
     signup: 'AuthPayload'
     updateLink: 'Link'
+    vote: 'Vote'
   }
   Query: { // field return type name
     feed: 'Link'
@@ -113,6 +126,11 @@ export interface NexusGenFieldTypeNames {
     id: 'String'
     links: 'Link'
     name: 'String'
+    votes: 'Link'
+  }
+  Vote: { // field return type name
+    link: 'Link'
+    user: 'User'
   }
 }
 
@@ -138,6 +156,9 @@ export interface NexusGenArgTypes {
       description?: string | null; // String
       id: string; // ID!
       url?: string | null; // String
+    }
+    vote: { // args
+      linkId: string; // String!
     }
   }
   Query: {
