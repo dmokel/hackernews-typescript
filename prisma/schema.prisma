@@ -12,7 +12,7 @@ datasource db {
 
 model Link{
   id String @id @map("_id") @default(auto()) @db.ObjectId
-  createAt DateTime @default(now())
+  createdAt DateTime @default(now())
   description String
   url String
   postedBy User? @relation(name:"PostedBy",fields:[postedById],references: [id])
